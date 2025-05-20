@@ -2,16 +2,19 @@
 <html lang="sk">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Minikurz: Ako si určiť ciele a konečne ich splniť</title>
   <style>
     body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; padding: 20px; background: #fcfcfc; }
     h1, h2, h3 { color: #2c3e50; }
     section { margin-bottom: 30px; padding: 20px; border-left: 6px solid #3498db; background: #eef8fd; border-radius: 6px; }
-    .quiz, .task, .reflection { margin-top: 15px; padding: 15px; background: #ffffff; border-radius: 5px; border: 1px solid #dcdcdc; }
+    .quiz, .task, .reflection { margin-top: 15px; padding: 15px; background: #fff; border-radius: 5px; border: 1px solid #dcdcdc; }
     .quiz label { display: block; margin-top: 5px; }
     textarea, input[type="text"] { width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 10px; border-radius: 4px; border: 1px solid #ccc; }
     ul { padding-left: 20px; }
+    button { background: #3498db; color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; margin-top: 10px; }
+    button:hover { background: #2980b9; }
+    .result { margin-top: 10px; font-weight: bold; }
   </style>
 </head>
 <body>
@@ -39,16 +42,18 @@
     <div class="task">
       <h3>🛠️ Úloha:</h3>
       <p>Napíš 3 veci, ktoré chceš dosiahnuť do 6 mesiacov:</p>
-      <input type="text" placeholder="Cieľ 1">
-      <input type="text" placeholder="Cieľ 2">
-      <input type="text" placeholder="Cieľ 3">
+      <input type="text" id="goal1" placeholder="Cieľ 1">
+      <input type="text" id="goal2" placeholder="Cieľ 2">
+      <input type="text" id="goal3" placeholder="Cieľ 3">
     </div>
     <div class="quiz">
       <h3>❓ Mini-kvíz:</h3>
       <p>Aká je najväčšia výhoda stanovenia cieľov?</p>
-      <label><input type="radio" name="q1"> Sú moderné</label>
-      <label><input type="radio" name="q1"> Pomáhajú zamerať sa a napredovať</label>
-      <label><input type="radio" name="q1"> Vyzerajú dobre na papieri</label>
+      <label><input type="radio" name="q1" value="wrong"> Sú moderné</label>
+      <label><input type="radio" name="q1" value="correct"> Pomáhajú zamerať sa a napredovať</label>
+      <label><input type="radio" name="q1" value="wrong"> Vyzerajú dobre na papieri</label>
+      <button onclick="checkQuiz('q1', 'result1')">Overiť odpoveď</button>
+      <div id="result1" class="result"></div>
     </div>
   </section>
 
@@ -65,14 +70,16 @@
     <div class="task">
       <h3>🛠️ Úloha:</h3>
       <p>Vezmi jeden cieľ z predchádzajúcej lekcie a prepíš ho ako SMART:</p>
-      <textarea rows="4" placeholder="Môj SMART cieľ..."></textarea>
+      <textarea id="smartGoal" rows="4" placeholder="Môj SMART cieľ..."></textarea>
     </div>
     <div class="quiz">
       <h3>❓ Mini-kvíz:</h3>
       <p>Čo znamená „T“ v SMART?</p>
-      <label><input type="radio" name="q2"> Talentovaný</label>
-      <label><input type="radio" name="q2"> Časovo ohraničený</label>
-      <label><input type="radio" name="q2"> Testovateľný</label>
+      <label><input type="radio" name="q2" value="wrong"> Talentovaný</label>
+      <label><input type="radio" name="q2" value="correct"> Časovo ohraničený</label>
+      <label><input type="radio" name="q2" value="wrong"> Testovateľný</label>
+      <button onclick="checkQuiz('q2', 'result2')">Overiť odpoveď</button>
+      <div id="result2" class="result"></div>
     </div>
   </section>
 
@@ -82,16 +89,18 @@
     <div class="task">
       <h3>🛠️ Úloha:</h3>
       <p>Napíš si 3 malé kroky, ktoré vieš spraviť tento týždeň:</p>
-      <input type="text" placeholder="Krok 1">
-      <input type="text" placeholder="Krok 2">
-      <input type="text" placeholder="Krok 3">
+      <input type="text" id="step1" placeholder="Krok 1">
+      <input type="text" id="step2" placeholder="Krok 2">
+      <input type="text" id="step3" placeholder="Krok 3">
     </div>
     <div class="quiz">
       <h3>❓ Mini-kvíz:</h3>
       <p>Prečo sú malé kroky dôležité?</p>
-      <label><input type="radio" name="q3"> Sú menej nápadné</label>
-      <label><input type="radio" name="q3"> Budujú návyk a motiváciu</label>
-      <label><input type="radio" name="q3"> Sú nudné</label>
+      <label><input type="radio" name="q3" value="wrong"> Sú menej nápadné</label>
+      <label><input type="radio" name="q3" value="correct"> Budujú návyk a motiváciu</label>
+      <label><input type="radio" name="q3" value="wrong"> Sú nudné</label>
+      <button onclick="checkQuiz('q3', 'result3')">Overiť odpoveď</button>
+      <div id="result3" class="result"></div>
     </div>
   </section>
 
@@ -101,16 +110,18 @@
     <div class="task">
       <h3>🛠️ Úloha:</h3>
       <p>Aké 3 prekážky ti môžu stáť v ceste?</p>
-      <input type="text" placeholder="Prekážka 1">
-      <input type="text" placeholder="Prekážka 2">
-      <input type="text" placeholder="Prekážka 3">
+      <input type="text" id="obstacle1" placeholder="Prekážka 1">
+      <input type="text" id="obstacle2" placeholder="Prekážka 2">
+      <input type="text" id="obstacle3" placeholder="Prekážka 3">
     </div>
     <div class="quiz">
       <h3>❓ Mini-kvíz:</h3>
       <p>Čo robiť, keď zlyháš?</p>
-      <label><input type="radio" name="q4"> Vzdať sa</label>
-      <label><input type="radio" name="q4"> Poučiť sa a skúsiť znova</label>
-      <label><input type="radio" name="q4"> Hnevať sa</label>
+      <label><input type="radio" name="q4" value="wrong"> Vzdať sa</label>
+      <label><input type="radio" name="q4" value="correct"> Poučiť sa a skúsiť znova</label>
+      <label><input type="radio" name="q4" value="wrong"> Hnevať sa</label>
+      <button onclick="checkQuiz('q4', 'result4')">Overiť odpoveď</button>
+      <div id="result4" class="result"></div>
     </div>
   </section>
 
@@ -120,14 +131,16 @@
     <div class="task">
       <h3>🛠️ Úloha:</h3>
       <p>Aký nový návyk si vieš vybudovať, aby si sa posúval/a k cieľu?</p>
-      <textarea rows="3" placeholder="Napríklad: Každý deň ráno si napíšem 1 vec, ktorú spravím pre svoj cieľ..."></textarea>
+      <textarea id="habit" rows="3" placeholder="Napríklad: Každý deň ráno si napíšem 1 vec, ktorú spravím pre svoj cieľ..."></textarea>
     </div>
     <div class="quiz">
       <h3>❓ Mini-kvíz:</h3>
       <p>Čo zvyšuje pravdepodobnosť, že dosiahneš cieľ?</p>
-      <label><input type="radio" name="q5"> Opakovanie a rutina</label>
-      <label><input type="radio" name="q5"> Nákup plánovača</label>
-      <label><input type="radio" name="q5"> Pozerať motivačné videá</label>
+      <label><input type="radio" name="q5" value="correct"> Opakovanie a rutina</label>
+      <label><input type="radio" name="q5" value="wrong"> Nákup plánovača</label>
+      <label><input type="radio" name="q5" value="wrong"> Pozerať motivačné videá</label>
+      <button onclick="checkQuiz('q5', 'result5')">Overiť odpoveď</button>
+      <div id="result5" class="result"></div>
     </div>
   </section>
 
@@ -141,5 +154,18 @@
     </div>
   </section>
 
-</body>
-</html>
+  <script>
+    function checkQuiz(questionName, resultId) {
+      const options = document.getElementsByName(questionName);
+      let correct = false;
+      for (let option of options) {
+        if (option.checked) {
+          if (option.value === "correct") {
+            correct = true;
+          }
+          break;
+        }
+      }
+      const resultDiv = document.getElementById(resultId);
+      if (correct) {
+        resultDiv.textContent = "Správna odpoveď! 🎉";
